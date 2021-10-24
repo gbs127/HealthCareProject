@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './src/screens/HomeScreen'
+import DoctorHomeScreen from './src/screens/DoctorHomeScreen'
+import Consultation from './src/screens/ConsultationScreen'
+import NurseHomeScreen from './src/screens/NurseHomeScreen'
+import VaccinationScreen from './src/screens/VaccinationScreen'
 
-export default function App() {
+
+const Stack = createNativeStackNavigator();
+
+function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+            <Stack.Screen name="Home" component={HomeScreen}
+                          options={{ headerTitle: props => "Página Inicial" }}
+            />
+            <Stack.Screen name="DoctorHome" component={DoctorHomeScreen}
+                          options={{ headerTitle: props => "Médico" }}
+            />
+            <Stack.Screen name="Consultation" component={Consultation}
+                          options={{ headerTitle: props => "Consulta" }}
+            />
+            <Stack.Screen name="NurseHome" component={NurseHomeScreen}
+                          options={{ headerTitle: props => "Enfermeira" }}
+            />
+            <Stack.Screen name="Vaccination" component={VaccinationScreen}
+                          options={{ headerTitle: props => "Cartão de Vacina" }}
+            />
+        </Stack.Navigator>
+      </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
